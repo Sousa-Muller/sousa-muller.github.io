@@ -1,8 +1,8 @@
-# Portfólio — Alex Müller
+# Portfólio · Sousa Müller
 
 Site estático de portfólio para freelancer de tecnologia. HTML, CSS e JavaScript puro — sem build, sem backend. Pronto para o GitHub Pages.
 
-Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Alex Müller e da análise dos projetos reais.
+Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Sousa Müller e da análise dos projetos reais. Estilo do texto: foco em freelancer, sem travessão (—).
 
 ## Estrutura
 

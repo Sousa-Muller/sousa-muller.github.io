@@ -25,7 +25,7 @@
   var map = function (arr, fn) { return (arr || []).map(fn).join(""); };
 
   /* ---------- Section numbering ---------- */
-  var ORDER = ["about", "services", "projects", "experience", "skills", "process", "testimonials", "education", "faq", "contact"];
+  var ORDER = ["services", "projects", "process", "about", "experience", "skills", "testimonials", "education", "faq", "contact"];
   var enabled = ORDER.filter(function (k) { return S.sections[k] !== false && S[k]; });
   var num = function (key) { return pad(enabled.indexOf(key) + 1); };
 
@@ -53,7 +53,7 @@
   /* ---------- Hero ---------- */
   function renderHero() {
     var p = S.profile;
-    document.title = p.name + " — " + p.role;
+    document.title = p.name + " · " + p.role;
     $$('[data-bind="name"]').forEach(function (el) { el.textContent = p.name; });
     var b = function (k, v) { var el = $('#hero-copy [data-bind="' + k + '"]'); if (el) el.textContent = v; };
     b("role", p.role); b("subheadline", p.subheadline); b("primaryCta", p.primaryCta); b("secondaryCta", p.secondaryCta);
@@ -91,12 +91,12 @@
   function renderAbout(el) {
     var a = S.about, p = S.profile;
     var photo = p.photo
-      ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt) + '" width="800" height="1000" loading="lazy" decoding="async" onerror="this.remove()">'
+      ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt) + '" width="800" height="1000" decoding="async" onerror="this.remove()">'
       : "";
     el.innerHTML = '<div class="container">' + head("about", "sobre", a) +
       '<div class="about-grid">' +
         '<div class="about-visual">' +
-          '<div class="portrait" data-reveal><div class="placeholder"><span>retrato 4:5 — assets/images/</span></div>' + photo +
+          '<div class="portrait" data-reveal><div class="placeholder"><span>retrato 4:5 · assets/images/</span></div>' + photo +
             '<div class="portrait-tag"><span>' + esc(p.name) + '</span><small>' + esc(p.location.split("·")[0].trim()) + "</small></div></div>" +
           '<ol class="milestones" data-reveal style="--i:1">' + map(a.milestones, function (m) { return "<li><b>" + esc(m.year) + "</b><span>" + esc(m.text) + "</span></li>"; }) + "</ol>" +
         "</div>" +
@@ -225,7 +225,7 @@
     var link = function (url, label) {
       return url
         ? '<a class="btn btn-ghost" href="' + esc(url) + '" target="_blank" rel="noopener">' + label + ' <span class="arrow" aria-hidden="true">↗</span></a>'
-        : '<span class="btn btn-ghost" aria-disabled="true">' + label + " — a definir</span>";
+        : '<span class="btn btn-ghost" aria-disabled="true">' + label + " (a definir)</span>";
     };
     $("#dialog-content").innerHTML =
       '<div class="dialog-bar"><span>Estudo de caso · ' + esc(p.category) + '</span><button class="dialog-close" type="button" aria-label="Fechar estudo de caso"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>' +
@@ -355,7 +355,7 @@
           "<p>" + esc(c.text) + "</p>" +
           '<div class="email-row"><a class="email-link" href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a><button class="copy-btn" type="button" data-copy="' + esc(c.email) + '">copiar</button></div>' +
           '<div class="contact-actions"><a class="btn btn-light" href="' + esc(waUrl()) + '" target="_blank" rel="noopener">Conversar pelo WhatsApp <span class="arrow" aria-hidden="true">↗</span></a>' +
-            (w.isExample ? '<span class="wa-note">número de exemplo — configure em data.js</span>' : "") + "</div>" +
+            (w.isExample ? '<span class="wa-note">número de exemplo: configure em data.js</span>' : "") + "</div>" +
           '<nav class="socials" aria-label="Redes profissionais">' + map(c.socials, function (s) {
             return '<a href="' + esc(s.url) + '"' + (/^https?:/.test(s.url) ? ' target="_blank" rel="noopener"' : "") + ">" + esc(s.label) + "<span>" + esc(s.handle) + " ↗</span></a>";
           }) + "</nav>" +
@@ -401,11 +401,11 @@
       var fields = $$("input, textarea", form), valid = fields.map(validate).every(Boolean);
       if (!valid) { var bad = $(".has-error input, .has-error textarea", form); if (bad) bad.focus(); return; }
       var d = new FormData(form);
-      var subject = "[Portfólio] " + d.get("subject") + " — " + d.get("name");
-      var body = d.get("message") + "\n\n—\n" + d.get("name") + "\n" + d.get("email");
+      var subject = "[Portfólio] " + d.get("subject") + " · " + d.get("name");
+      var body = d.get("message") + "\n\n--\n" + d.get("name") + "\n" + d.get("email");
       var href = "mailto:" + S.contact.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       status.hidden = false;
-      status.innerHTML = "<p><b>Mensagem preparada.</b> Tentamos abrir seu aplicativo de e-mail — o envio só acontece quando você confirmar por lá. Se nada abriu, copie o texto e envie para " + esc(S.contact.email) + ".</p>" +
+      status.innerHTML = "<p><b>Mensagem preparada.</b> Tentamos abrir seu aplicativo de e-mail. O envio só acontece quando você confirmar por lá. Se nada abriu, copie o texto e envie para " + esc(S.contact.email) + ".</p>" +
         '<div class="row"><a class="btn btn-sm btn-light" href="' + esc(href) + '">Abrir e-mail novamente</a><button class="btn btn-sm btn-outline-light" type="button" data-copy-msg>Copiar mensagem</button></div>';
       $("[data-copy-msg]", status).addEventListener("click", function (ev) { copy("Assunto: " + subject + "\n\n" + body, ev.currentTarget, "Copiado"); });
       window.location.href = href;
