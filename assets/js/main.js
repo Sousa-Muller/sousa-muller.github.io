@@ -156,10 +156,10 @@
         '<div class="cv-lcopy"><span class="cv-tag">correção mecânica</span><b>PRECISÃO EM</b><b class="hot">CADA REPETIÇÃO</b><span class="cv-line"></span><span class="cv-line short"></span><span class="cv-cta">reservar agora</span></div>' +
         '<div class="cv-lform"><span>solicitar equipamento</span><i></i><i></i><i class="half"></i><em>enviar via WhatsApp</em></div></div></div>';
     },
-    agents: function () {
-      var a = [["elicitação", "ok", "pronto"], ["arquitetura", "ok", "pronto"], ["desenvolvimento", "ok", "pronto"], ["code review", "warn", "revisão humana"], ["QA de interface", "", "na fila"]];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>pipeline / pedido #128</em></div><div class="cv-agents">' +
-        map(a, function (x, i) { return '<div class="cv-agent"><b>0' + (i + 1) + "</b><span>" + x[0] + '</span><span class="cv-pill ' + x[1] + '">' + x[2] + "</span></div>"; }) + "</div></div>";
+    agents: function (p) {
+      var g = p.agents || { title: "pipeline / pedido #128", rows: [["elicitação", "ok", "pronto"], ["arquitetura", "ok", "pronto"], ["desenvolvimento", "ok", "pronto"], ["code review", "warn", "revisão humana"], ["QA de interface", "", "na fila"]] };
+      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>' + esc(g.title) + '</em></div><div class="cv-agents">' +
+        map(g.rows, function (x, i) { return '<div class="cv-agent"><b>0' + (i + 1) + "</b><span>" + esc(x[0]) + '</span><span class="cv-pill ' + x[1] + '">' + esc(x[2]) + "</span></div>"; }) + "</div></div>";
     },
     mcp: function () {
       var rows = [["db.query", "read-only", "ok"], ["user.email", "sha256:9f2c…", "warn"], ["e2e.run", "12/12 passos", "ok"], ["memory.find", "62 registros", ""]];
