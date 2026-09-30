@@ -145,10 +145,26 @@
         '<div class="cv-list">' + map(v, function (x) { return '<div class="cv-veh"><span>' + x[0] + '</span><span class="cv-pill ' + x[1] + '">' + x[2] + "</span></div>"; }) + "</div></div></div>";
     },
     flow: function (p) {
-      var node = function (t) { return '<div class="cv-node">' + t + "</div>"; };
-      return '<div class="cv-stage"><div class="cv-col l">' + node("e-commerce") + node("marketplace") + node("lojas · PDV") + "</div>" +
-        '<div class="cv-hub"><div>' + esc(p.name.toLowerCase()) + "<small>&lt; 40s</small></div></div>" +
-        '<div class="cv-col r">' + node("ERP legado") + node("estoque") + node("fiscal") + "</div></div>";
+      var f = p.flow || { left: ["e-commerce", "marketplace", "lojas · PDV"], hub: p.name.toLowerCase(), hubNote: "", right: ["ERP legado", "estoque", "fiscal"] };
+      var node = function (t) { return '<div class="cv-node">' + esc(t) + "</div>"; };
+      return '<div class="cv-stage"><div class="cv-col l">' + map(f.left, node) + "</div>" +
+        '<div class="cv-hub"><div>' + esc(f.hub) + (f.hubNote ? "<small>" + esc(f.hubNote) + "</small>" : "") + "</div></div>" +
+        '<div class="cv-col r">' + map(f.right, node) + "</div></div>";
+    },
+    landing: function () {
+      return '<div class="cv-win cv-dark"><div class="cv-bar"><i></i><i></i><i></i><em>pré-venda / página única</em></div><div class="cv-landing">' +
+        '<div class="cv-lcopy"><span class="cv-tag">correção mecânica</span><b>PRECISÃO EM</b><b class="hot">CADA REPETIÇÃO</b><span class="cv-line"></span><span class="cv-line short"></span><span class="cv-cta">reservar agora</span></div>' +
+        '<div class="cv-lform"><span>solicitar equipamento</span><i></i><i></i><i class="half"></i><em>enviar via WhatsApp</em></div></div></div>';
+    },
+    agents: function () {
+      var a = [["elicitação", "ok", "pronto"], ["arquitetura", "ok", "pronto"], ["desenvolvimento", "ok", "pronto"], ["code review", "warn", "revisão humana"], ["QA de interface", "", "na fila"]];
+      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>pipeline / pedido #128</em></div><div class="cv-agents">' +
+        map(a, function (x, i) { return '<div class="cv-agent"><b>0' + (i + 1) + "</b><span>" + x[0] + '</span><span class="cv-pill ' + x[1] + '">' + x[2] + "</span></div>"; }) + "</div></div>";
+    },
+    mcp: function () {
+      var rows = [["db.query", "read-only", "ok"], ["user.email", "sha256:9f2c…", "warn"], ["e2e.run", "12/12 passos", "ok"], ["memory.find", "62 registros", ""]];
+      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>mcp / ferramentas do time</em></div><div class="cv-rows cv-mcp">' +
+        map(rows, function (r) { return '<div class="cv-row"><span>' + r[0] + '</span><span class="cv-pill ' + r[2] + '">' + r[1] + "</span></div>"; }) + "</div></div>";
     },
     dashboard: function () {
       var bars = [42, 58, 50, 66, 61, 74, 70, 83, 78, 92];
@@ -184,6 +200,7 @@
         return '<article class="project" data-reveal style="--i:' + (i % 2) + '">' + cover(p) +
           '<div class="project-body">' +
             '<p class="project-meta"><span>' + esc(p.category) + "</span><span>" + esc(p.year) + "</span></p>" +
+            (p.confidential ? '<p class="project-flag">Confidencial</p>' : "") +
             "<h3>" + esc(p.name) + "</h3>" +
             '<p class="project-summary">' + esc(p.summary) + "</p>" +
             '<div class="project-ps"><p><b>Problema</b>' + esc(p.problem) + "</p><p><b>Solução</b>" + esc(p.solution) + "</p></div>" +
@@ -203,6 +220,8 @@
     var d = p.details || {};
     var block = function (title, body) { return body ? '<section class="d-block"><h3>' + title + "</h3><div>" + body + "</div></section>" : ""; };
     var list = function (arr) { return arr && arr.length ? "<ul>" + map(arr, function (x) { return "<li>" + esc(x) + "</li>"; }) + "</ul>" : ""; };
+    var fact = function (k, v) { return v ? "<div><dt>" + k + "</dt><dd>" + esc(v) + "</dd></div>" : ""; };
+    var links = Array.isArray(p.links) ? p.links : [p.links && p.links.demo && { label: "Ver aplicação", url: p.links.demo }, p.links && p.links.repo && { label: "Ver repositório", url: p.links.repo }].filter(Boolean);
     var link = function (url, label) {
       return url
         ? '<a class="btn btn-ghost" href="' + esc(url) + '" target="_blank" rel="noopener">' + label + ' <span class="arrow" aria-hidden="true">↗</span></a>'
@@ -211,7 +230,7 @@
     $("#dialog-content").innerHTML =
       '<div class="dialog-bar"><span>Estudo de caso · ' + esc(p.category) + '</span><button class="dialog-close" type="button" aria-label="Fechar estudo de caso"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>' +
       '<div class="dialog-hero"><div>' + demo("Projeto fictício de demonstração") + '<h2 id="dialog-title">' + esc(p.name) + "</h2></div><p>" + esc(p.summary) + "</p></div>" +
-      '<dl class="dialog-facts"><div><dt>Cliente</dt><dd>' + esc(p.client) + "</dd></div><div><dt>Ano</dt><dd>" + esc(p.year) + "</dd></div><div><dt>Duração</dt><dd>" + esc(p.duration) + "</dd></div><div><dt>Stack</dt><dd>" + esc((p.stack || []).join(", ")) + "</dd></div></dl>" +
+      '<dl class="dialog-facts">' + fact("Cliente", p.client) + fact("Ano", p.year) + fact("Duração", p.duration) + fact("Stack", (p.stack || []).join(", ")) + "</dl>" +
       '<div class="dialog-cover">' + cover(p) + "</div>" +
       '<div class="dialog-body">' +
         block("Contexto e desafio", "<p>" + esc(d.context) + "</p><p><b>Problema:</b> " + esc(p.problem) + "</p>") +
@@ -219,9 +238,9 @@
         block("Minha atuação", d.role ? "<p>" + esc(d.role) + "</p>" : "") +
         block("Arquitetura e decisões", list(d.architecture)) +
         block("Processo", d.process ? "<p>" + esc(d.process) + "</p>" : "") +
-        block("Resultados", '<div class="results">' + map(p.results, function (r) { return "<div><strong>" + esc(r.value) + "</strong><span>" + esc(r.label) + "</span></div>"; }) + "</div>" + demo("Números fictícios")) +
+        block("Destaques", '<div class="results">' + map(p.results, function (r) { return "<div><strong>" + esc(r.value) + "</strong><span>" + esc(r.label) + "</span></div>"; }) + "</div>" + demo("Números fictícios")) +
         block("Aprendizados", d.learnings ? "<p>" + esc(d.learnings) + "</p>" : "") +
-        block("Links", '<div class="dialog-links">' + link(p.links && p.links.demo, "Ver aplicação") + link(p.links && p.links.repo, "Ver repositório") + "</div>") +
+        block("Links", (links.length ? '<div class="dialog-links">' + map(links, function (l) { return link(l.url, esc(l.label)); }) + "</div>" : "") + (p.note ? '<p class="dialog-note">' + esc(p.note) + "</p>" : "")) +
       "</div>";
     $("#dialog-content").scrollTop = 0;
     lastFocus = document.activeElement;
@@ -254,7 +273,7 @@
         return '<li class="job" data-reveal>' +
           '<div class="job-when"><p class="job-period">' + esc(j.period) + '</p><p class="job-company">' + esc(j.company) + '</p><p class="job-meta">' + esc(j.meta) + "</p></div>" +
           '<div class="job-main"><h3>' + esc(j.role) + '</h3><p class="job-summary">' + esc(j.summary) + "</p>" +
-            '<ul class="job-contrib" aria-label="Principais contribuições">' + map(j.contributions, function (c) { return "<li>" + esc(c) + "</li>"; }) + "</ul>" +
+            ((j.contributions || []).length ? '<ul class="job-contrib" aria-label="Principais contribuições">' + map(j.contributions, function (c) { return "<li>" + esc(c) + "</li>"; }) + "</ul>" : "") +
             '<div class="job-side"><div class="impact">' + map(j.impact, function (m) { return "<div><strong>" + esc(m.value) + "</strong><span>" + esc(m.label) + "</span></div>"; }) + "</div>" +
             '<div class="chips">' + map(j.stack, function (t) { return '<span class="chip chip-mono">' + esc(t) + "</span>"; }) + "</div></div>" +
           "</div></li>";

@@ -1,8 +1,8 @@
-# Portfólio — Rafael Moura (demonstração)
+# Portfólio — Alex Müller
 
 Site estático de portfólio para freelancer de tecnologia. HTML, CSS e JavaScript puro — sem build, sem backend. Pronto para o GitHub Pages.
 
-> Todo o conteúdo (nome, empresas, projetos, números, depoimentos, formação e contatos) é **fictício**. Substitua antes de publicar.
+Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Alex Müller e da análise dos projetos reais.
 
 ## Estrutura
 
@@ -22,8 +22,8 @@ assets/images/          favicon.svg, og-image.png e suas imagens
 2. **Ocultar seções** — em `sections`, defina `false` (ex.: `education: false`). A numeração e a navegação se ajustam sozinhas.
 3. **Avisos de demonstração** — quando o conteúdo for real, defina `meta.showDemoNotices: false`.
 4. **Foto** — salve em `assets/images/` (proporção 4:5) e informe em `profile.photo`, ex.: `"assets/images/retrato.jpg"`. Sem foto, é exibido um placeholder.
-5. **Capas dos projetos** — cada projeto tem uma ilustração gerada em HTML/CSS (`cover`: `saas`, `fleet`, `flow`, `dashboard`, `automation`) e uma cor (`hue`, 0–360). Para usar uma imagem real, preencha `image` com o caminho do arquivo (16:10 recomendado).
-6. **Links de projetos** — `links.demo` e `links.repo`. Vazios aparecem como "a definir" (desabilitados).
+5. **Capas dos projetos** — cada projeto tem uma ilustração gerada em HTML/CSS (`cover`: `flow`, `landing`, `agents`, `mcp`, `saas`, `fleet`, `dashboard`, `automation`) e uma cor (`hue`, 0–360). A capa `flow` lê os nós de `flow.left`, `flow.hub`, `flow.hubNote` e `flow.right`. Para usar um print real, preencha `image` com o caminho do arquivo (16:10 recomendado).
+6. **Links de projetos** — `links` é uma lista `[{ label, url }]`; lista vazia esconde os botões. `note` mostra um aviso abaixo (ex.: código privado). `confidential: true` exibe a etiqueta "Confidencial" no cartão. Campos vazios (`duration`, `process`, `learnings`) somem do estudo de caso.
 7. **Contato** — `contact.email`, `contact.whatsapp.number` (formato internacional, só números; ex.: `5511987654321`) e `contact.socials`. Defina `whatsapp.isExample: false` ao usar seu número real.
 8. **Visual** — cores, fontes e espaçamentos estão em variáveis CSS no topo de `styles.css` (`:root`). A cor de destaque é `--accent`.
 9. **SEO** — atualize `<title>`, `meta description` e as tags `og:` em `index.html`. Troque `assets/images/og-image.png` (1200×630) e `favicon.svg`. Para o Open Graph funcionar em todas as redes, use a URL absoluta da imagem após publicar.
