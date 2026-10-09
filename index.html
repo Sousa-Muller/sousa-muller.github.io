@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sousa Müller · Engenheiro de software freelancer</title>
-  <meta name="description" content="Sousa Müller, engenheiro de software freelancer: integrações entre sistemas, sites e aplicações web, backend em AWS e IA aplicada. Mais de 10 anos de experiência, com passagens por Itaú Unibanco e Globo.">
-  <meta name="theme-color" content="#f7f5f0">
+  <title>Sousa Müller · Engenheiro de software</title>
+  <meta name="description" content="Sousa Müller, engenheiro de software: backend, integrações entre sistemas, nuvem AWS e IA aplicada. Mais de 10 anos de experiência, com passagens por Itaú Unibanco e Globo. Disponível para posições PJ ou CLT.">
+  <meta name="theme-color" content="#16181d">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="Sousa Müller · Engenheiro de software freelancer">
-  <meta property="og:description" content="Integrações, sistemas web e IA que funcionam em produção.">
+  <meta property="og:title" content="Sousa Müller · Engenheiro de software">
+  <meta property="og:description" content="Backend, integrações e IA aplicada. Disponível para posições PJ ou CLT.">
   <meta property="og:url" content="https://sousa-muller.github.io/">
   <meta property="og:image" content="https://sousa-muller.github.io/assets/images/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/data.js" defer></script>
   <script src="assets/js/main.js" defer></script>
@@ -27,13 +27,12 @@
   <header class="site-header" id="site-header">
     <div class="container header-inner">
       <a class="brand" href="#inicio" aria-label="Início">
-        <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name" data-bind="name">Sousa Müller</span>
       </a>
       <nav class="nav" aria-label="Principal">
         <ul class="nav-list" id="nav-list"></ul>
       </nav>
-      <a class="btn btn-primary btn-sm header-cta" href="#contato">Vamos conversar</a>
+      <a class="btn btn-primary btn-sm header-cta" href="#contato">Entrar em contato</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
         <span></span><span></span>
       </button>
@@ -42,7 +41,7 @@
       <nav aria-label="Menu móvel">
         <ul class="mobile-list" id="mobile-list"></ul>
       </nav>
-      <a class="btn btn-primary mobile-cta" href="#contato">Vamos conversar</a>
+      <a class="btn btn-primary mobile-cta" href="#contato">Entrar em contato</a>
     </div>
   </header>
 
@@ -50,69 +49,32 @@
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy" id="hero-copy">
-          <p class="hero-kicker"><span class="dot" aria-hidden="true"></span><span data-bind="role">Engenheiro de software freelancer</span></p>
-          <h1 class="hero-title" id="hero-title">Integrações, sistemas web e IA <em>que funcionam em produção.</em></h1>
-          <p class="hero-sub" data-bind="subheadline">Engenheiro de software freelancer, com mais de 10 anos de experiência e passagens por Itaú Unibanco e Globo.</p>
+          <p class="hero-kicker"><span data-bind="name">Sousa Müller</span> · <span data-bind="role">Engenheiro de software</span></p>
+          <h1 class="hero-title" id="hero-title">Backend, integrações e IA aplicada, em produção desde 2014.</h1>
+          <p class="hero-sub" data-bind="subheadline">Engenheiro de software com mais de 10 anos de experiência. Disponível para posições PJ ou CLT.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contato" data-bind="primaryCta">Conversar sobre um projeto</a>
-            <a class="btn btn-ghost" href="#projetos" data-bind="secondaryCta">Ver projetos</a>
+            <a class="btn btn-primary" href="#contato" data-bind="primaryCta">Entrar em contato</a>
+            <a class="btn btn-ghost" href="#experiencia" data-bind="secondaryCta">Ver experiência</a>
           </div>
           <p class="hero-stack" id="hero-stack"></p>
         </div>
 
-        <figure class="hero-figure" aria-label="Diagrama ilustrativo de uma arquitetura de referência">
-          <div class="fig-head"><span>fig. 01</span><span>arquitetura de referência</span></div>
-          <svg class="diagram" viewBox="0 0 360 380" role="img" aria-hidden="true">
-            <g class="wires">
-              <path class="wire" d="M180 56 V100"/>
-              <path class="wire" d="M180 140 V162 H68 V190"/>
-              <path class="wire" d="M180 140 V190"/>
-              <path class="wire" d="M180 140 V162 H292 V190"/>
-              <path class="wire" d="M68 226 V262 H100 V290"/>
-              <path class="wire" d="M180 226 V262 H100"/>
-              <path class="wire" d="M180 226 V262 H260 V290"/>
-              <path class="wire" d="M292 226 V262 H260"/>
-            </g>
-            <g class="nodes">
-              <rect x="126" y="20" width="108" height="36" rx="6"/>
-              <rect class="accent" x="104" y="100" width="152" height="40" rx="6"/>
-              <rect x="20" y="190" width="96" height="36" rx="6"/>
-              <rect x="132" y="190" width="96" height="36" rx="6"/>
-              <rect x="244" y="190" width="96" height="36" rx="6"/>
-              <rect x="40" y="290" width="120" height="36" rx="6"/>
-              <rect x="200" y="290" width="120" height="36" rx="6"/>
-            </g>
-            <g class="joints">
-              <circle cx="180" cy="162" r="3"/><circle cx="100" cy="262" r="3"/><circle cx="260" cy="262" r="3"/>
-            </g>
-            <g class="labels">
-              <text x="180" y="42">cliente</text>
-              <text x="180" y="124" class="strong">api gateway</text>
-              <text x="68" y="212">integrações</text>
-              <text x="180" y="212">portal</text>
-              <text x="292" y="212">agentes · llm</text>
-              <text x="100" y="312">fila · sqs</text>
-              <text x="260" y="312">postgres</text>
-            </g>
-          </svg>
-          <figcaption class="fig-foot">
-            <span><b>experiência</b> 10+ anos</span><span><b>integrações</b> 13 fluxos</span><span><b>atendimento</b> direto</span>
-          </figcaption>
+        <figure class="hero-photo">
+          <img src="assets/images/retrato.jpg" alt="Retrato de Sousa Müller" width="800" height="1000" decoding="async">
         </figure>
 
         <dl class="hero-stats" id="hero-stats"></dl>
       </div>
     </section>
 
-    <section class="section section--alt" id="servicos" data-section="services" aria-labelledby="servicos-title"></section>
-    <section class="section" id="projetos" data-section="projects" aria-labelledby="projetos-title"></section>
-    <section class="section section--alt" id="processo" data-section="process" aria-labelledby="processo-title"></section>
-    <section class="section" id="sobre" data-section="about" aria-labelledby="sobre-title"></section>
     <section class="section section--alt" id="experiencia" data-section="experience" aria-labelledby="experiencia-title"></section>
+    <section class="section" id="projetos" data-section="projects" aria-labelledby="projetos-title"></section>
+    <section class="section section--alt" id="atuacao" data-section="services" aria-labelledby="atuacao-title"></section>
     <section class="section" id="competencias" data-section="skills" aria-labelledby="competencias-title"></section>
+    <section class="section section--alt" id="sobre" data-section="about" aria-labelledby="sobre-title"></section>
     <section class="section" id="depoimentos" data-section="testimonials" aria-labelledby="depoimentos-title"></section>
-    <section class="section section--alt section--compact" id="formacao" data-section="education" aria-labelledby="formacao-title"></section>
-    <section class="section" id="faq" data-section="faq" aria-labelledby="faq-title"></section>
+    <section class="section section--compact" id="formacao" data-section="education" aria-labelledby="formacao-title"></section>
+    <section class="section section--alt" id="faq" data-section="faq" aria-labelledby="faq-title"></section>
     <section class="section section--night" id="contato" data-section="contact" aria-labelledby="contato-title"></section>
 
     <noscript>

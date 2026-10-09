@@ -2,7 +2,6 @@
    CONTEÚDO DO SITE: edite apenas este arquivo para personalizar.
    ---------------------------------------------------------------------
    • Fonte: currículo de Sousa Müller (set/2026) e análise dos projetos.
-   • Textos marcados com *asteriscos* viram ênfase tipográfica (itálico).
    • Para ocultar uma seção, defina false em `sections`.
    • Imagens: coloque arquivos em assets/images/ e informe o caminho
      relativo (ex.: "assets/images/retrato.jpg"). Campos vazios exibem
@@ -19,12 +18,11 @@ window.SITE = {
   },
 
   sections: {
-    about: true,
-    services: true,
-    projects: true,
     experience: true,
+    projects: true,
+    services: true,
     skills: true,
-    process: true,
+    about: true,
     testimonials: false, // ligue quando tiver depoimentos reais
     education: true,
     faq: true,
@@ -35,51 +33,51 @@ window.SITE = {
     name: "Sousa Müller",
     shortName: "Sousa",
     initials: "SM",
-    role: "Engenheiro de software freelancer",
-    location: "Jundiaí, SP · atendimento remoto para todo o Brasil",
-    availability: "Agenda aberta para novos projetos",
-    headline: "Integrações, sistemas web e IA *que funcionam em produção.*",
+    role: "Engenheiro de software",
+    location: "Jundiaí, SP · trabalho remoto",
+    availability: "Disponível para posições PJ ou CLT",
+    headline: "Backend, integrações e IA aplicada, em produção desde 2014.",
     subheadline:
-      "Sou engenheiro de software freelancer, com mais de 10 anos de experiência e passagens por Itaú Unibanco e Globo. Cuido do seu projeto do levantamento à publicação, falando direto com você, sem intermediários.",
-    primaryCta: "Conversar sobre um projeto",
-    secondaryCta: "Ver projetos",
+      "Engenheiro de software com mais de 10 anos de experiência, passagens por Itaú Unibanco, Globo e Kroton e atuação recente como lead técnico. Disponível para posições PJ ou CLT.",
+    primaryCta: "Entrar em contato",
+    secondaryCta: "LinkedIn",
+    secondaryCtaHref: "https://www.linkedin.com/in/sousamuller",
     stack: ["Node.js", "TypeScript", "React", "AWS", "PostgreSQL", "LLMs · MCP"],
     stats: [
-      { value: 10, suffix: "+", label: "anos entregando software em produção" },
-      { value: 7, suffix: "", label: "empresas atendidas, incluindo Itaú e Globo" },
-      { value: 13, suffix: "", label: "fluxos de integração entregues a um único cliente" },
-      { value: 4, suffix: "", label: "ferramentas de IA em uso diário por um time" },
+      { value: "10+", label: "anos com software em produção" },
+      { value: "4 de 5", label: "projetos do último ciclo com liderança técnica" },
+      { value: "20 mil", label: "usuários simultâneos após ajuste de escalonamento" },
+      { value: "~230 mil", label: "cadastros saneados em produção" },
     ],
     photo: "assets/images/retrato.jpg", // proporção 4:5
     photoAlt: "Retrato de Sousa Müller",
   },
 
   nav: [
-    { id: "servicos", label: "Serviços" },
+    { id: "experiencia", label: "Experiência" },
     { id: "projetos", label: "Projetos" },
-    { id: "processo", label: "Como trabalho" },
+    { id: "atuacao", label: "Atuação" },
     { id: "sobre", label: "Sobre" },
     { id: "faq", label: "FAQ" },
   ],
 
   about: {
-    label: "Sobre",
-    title: "Você fala *com quem faz.*",
-    lede: "Atendo empresas e empreendedores como freelancer, trazendo a experiência de grandes operações para projetos de qualquer tamanho.",
+    title: "Sobre mim",
+    lede: "Engenheiro de software desde 2014, hoje com foco em backend, integrações e IA aplicada.",
     paragraphs: [
       "Sou Sousa Müller, engenheiro de software. Desde 2014 construo sistemas em produção: sites e plataformas de ensino, produtos de educação, funcionalidades do Gshow e do Receitas na Globo e o fluxo de empréstimo consignado no app do Itaú Unibanco.",
-      "Como freelancer, cuido do projeto inteiro: entendo o problema, desenho a solução, desenvolvo, publico e acompanho depois da entrega. Foi assim com a integração entre plataforma de projetos e ERP do Grupo Soluto e com o site de pré-venda do Clutch Shooter.",
-      "Hoje meu foco está em integrações entre sistemas, backend em nuvem e IA aplicada: LLMs, ferramentas MCP e fluxos com agentes que tiram trabalho repetitivo das pessoas.",
+      "Na Arcotech, de 2025 a setembro de 2026, fui lead técnico em 4 dos 5 projetos do último ciclo, com integrações, integridade de dados e ferramentas de IA para o time. Em paralelo, entreguei projetos para clientes diretos, como a integração entre plataforma de projetos e ERP do Grupo Soluto e o site de pré-venda do Clutch Shooter.",
+      "Gosto de trabalhar perto do produto: entender o problema, propor uma solução do tamanho certo, entregar em partes pequenas e deixar o caminho documentado para quem vem depois. Procuro uma posição, PJ ou CLT, em que eu faça isso dentro de um time.",
     ],
     principles: [
       { title: "Clareza antes de código", text: "Entendo o problema, os números e as restrições antes de propor qualquer tecnologia." },
-      { title: "Simples até provar o contrário", text: "Solução proporcional ao tamanho do problema e do orçamento." },
-      { title: "Você não fica dependente", text: "Documentação, decisões registradas e código que outra pessoa consegue manter." },
+      { title: "Simples até provar o contrário", text: "Solução proporcional ao tamanho do problema." },
+      { title: "Conhecimento fica no time", text: "Documentação, decisões registradas e código que outra pessoa consegue manter." },
     ],
     differentials: [
-      "Contato direto com quem desenvolve, sem intermediários",
-      "Experiência de grandes operações, como Itaú Unibanco e Globo",
-      "Do levantamento à publicação: backend, frontend, nuvem e IA",
+      "Lead técnico em 4 dos 5 projetos do último ciclo na Arcotech",
+      "Experiência em grandes operações, como Itaú Unibanco e Globo",
+      "Atuação de ponta a ponta: backend, frontend, nuvem e IA",
       "Entregas curtas, cada uma com relatório do que mudou",
     ],
     interests: ["Integrações", "IA aplicada e agentes", "MCP", "Arquitetura serverless", "Sistemas distribuídos", "Observabilidade"],
@@ -88,65 +86,63 @@ window.SITE = {
       { year: "2019", text: "Tech Lead na Kroton, com arquitetura de um produto do zero." },
       { year: "2021", text: "Globo: Gshow e Receitas em Node.js, Go e React." },
       { year: "2022", text: "Itaú Unibanco: empréstimo consignado INSS no app." },
-      { year: "2025", text: "Primeiro cliente direto: integração do Grupo Soluto." },
+      { year: "2025", text: "Arcotech, como lead técnico, e integração para o Grupo Soluto." },
       { year: "2026", text: "Clutch Shooter no ar e Squad, minha equipe de agentes de IA." },
     ],
   },
 
   services: {
-    label: "Serviços",
-    title: "Como eu posso *ajudar o seu negócio.*",
-    lede: "Cada projeto começa pelo problema que você quer resolver. A tecnologia é consequência.",
+    title: "Áreas de atuação",
+    lede: "Onde eu mais contribuo num time de produto, com exemplos de onde isso já foi aplicado.",
     items: [
       {
         icon: "api",
-        title: "Integração entre sistemas",
-        text: "ERPs, CRMs e plataformas que não conversam entre si passam a trocar dados sozinhos, com retentativa e aviso de falhas.",
-        problem: "Dados digitados duas vezes e planilhas fazendo papel de integração.",
-        deliverables: ["Sincronização nos dois sentidos", "Webhooks com fila e retentativas", "Painel de execuções e alertas"],
+        title: "Backend e integrações",
+        text: "APIs REST, microsserviços, webhooks e filas em Node.js e TypeScript, com retentativa, registro de execuções e erros tratados.",
+        problem: "13 fluxos de sincronização entre WayV e Omie, nos dois sentidos, em produção desde 2025.",
+        deliverables: ["Node.js, TypeScript e Go", "Clean Architecture, DDD e hexagonal", "PostgreSQL, MySQL, MongoDB e Redis"],
       },
       {
-        icon: "web",
-        title: "Sites e aplicações web",
-        text: "Do site de lançamento ao sistema web completo, com React/Next.js e publicação em nuvem.",
-        problem: "Um produto ou serviço que precisa de presença online rápida, bem feita e fácil de manter.",
-        deliverables: ["Site ou aplicação publicada", "Formulários integrados (e-mail, WhatsApp)", "Domínio e hospedagem configurados"],
+        icon: "arch",
+        title: "Nuvem AWS e performance",
+        text: "Arquiteturas serverless e em contêineres, CI/CD e escalonamento dimensionado com teste de carga, não com palpite.",
+        problem: "Teste de carga com k6 e ajuste do escalonamento automático para picos de 20 mil usuários na Arcotech.",
+        deliverables: ["Lambda, ECS/Fargate, SQS e SNS", "Docker, GitHub Actions e Bitbucket Pipelines", "k6 e CloudWatch"],
       },
       {
         icon: "ai",
         title: "IA aplicada",
-        text: "Integração com LLMs (OpenAI, Anthropic/Claude), ferramentas MCP e fluxos com múltiplos agentes.",
-        problem: "Pessoas gastando horas em tarefas repetitivas que um modelo de linguagem pode apoiar com segurança.",
-        deliverables: ["Prova de conceito medida", "Revisão humana no fluxo", "Controle de custo e de dados pessoais"],
+        text: "Integração com LLMs, servidores MCP e fluxos com agentes, sempre com revisão humana, controle de custo e proteção de dados pessoais.",
+        problem: "4 servidores MCP em uso diário por um time e uma equipe própria de 7 agentes que leva demandas do board até o deploy.",
+        deliverables: ["OpenAI e Anthropic · Claude", "MCP e Claude Agent SDK", "LGPD: ofuscação e acesso somente leitura"],
       },
       {
-        icon: "arch",
-        title: "Backend e nuvem AWS",
-        text: "APIs, microsserviços e arquiteturas serverless ou em contêineres, do tamanho certo para o problema.",
-        problem: "Um sistema que cresceu sem desenho e ficou caro, lento de evoluir ou frágil.",
-        deliverables: ["Desenho da arquitetura", "Deploy com Docker e CI/CD", "Monitoramento básico"],
-      },
-      {
-        icon: "perf",
-        title: "Performance e capacidade",
-        text: "Teste de carga com k6 e ajuste de escalonamento automático com base em dados, não em palpite.",
-        problem: "Sistema que cai ou fica lento em pico de acesso.",
-        deliverables: ["Teste de carga com cenário real", "Diagnóstico de gargalos", "Plano de capacidade"],
+        icon: "web",
+        title: "Frontend",
+        text: "Interfaces em React, Next.js e Angular, de páginas de produto a fluxos críticos dentro de app de banco.",
+        problem: "Funcionalidades na home do Gshow (Globo) e o fluxo de consignado INSS no app do Itaú.",
+        deliverables: ["React, Next.js e Angular", "Micro-frontends", "Tailwind CSS e Sass"],
       },
       {
         icon: "review",
-        title: "Revisão técnica",
-        text: "Uma segunda opinião sobre código, pipelines e segurança, com recomendações priorizadas.",
-        problem: "Pipelines quebradas, testes ignorados e senhas expostas no código.",
-        deliverables: ["Relatório de saúde do projeto", "Varredura de segredos expostos", "Plano de correção priorizado"],
+        title: "Liderança técnica",
+        text: "Conduzo projetos do refinamento ao deploy, reviso código e registro as decisões para o time seguir sem depender de uma pessoa só.",
+        problem: "Lead técnico em 4 dos 5 projetos do último ciclo na Arcotech e Tech Lead na Kroton.",
+        deliverables: ["Refinamento e estimativa", "Code review e padrões de código", "Decisões técnicas documentadas"],
+      },
+      {
+        icon: "perf",
+        title: "Qualidade e segurança",
+        text: "Testes automatizados, pipelines saudáveis e revisão de segurança, com correções priorizadas pelo risco.",
+        problem: "Pipeline com 1.653 testes restaurada e senhas expostas encontradas em 5 repositórios numa auditoria de CI/CD.",
+        deliverables: ["Jest, Playwright e TDD", "SonarCloud", "OWASP e varredura de segredos"],
       },
     ],
   },
 
   projects: {
-    label: "Projetos",
-    title: "Trabalhos *para clientes.*",
-    lede: "Projetos entregues para clientes, um projeto próprio e um exemplo do que construo para times. Cada capa é uma ilustração do que o sistema faz, não um print.",
+    title: "Projetos",
+    lede: "Dois projetos para clientes diretos, um projeto próprio e um ferramental interno feito para um time de engenharia.",
     items: [
       {
         slug: "soluto-integracoes",
@@ -302,7 +298,7 @@ window.SITE = {
           { value: "SHA-256", label: "ofuscação de dados pessoais (LGPD)" },
         ],
         details: {
-          context: "Ferramental interno de uso coletivo de um time de engenharia. Código, telas e dados pertencem à empresa; aqui aparece só o que pode ser divulgado. É um exemplo do tipo de ferramenta de IA que posso construir para o seu time.",
+          context: "Ferramental interno de uso coletivo de um time de engenharia. Código, telas e dados pertencem à empresa; aqui aparece só o que pode ser divulgado. Mostra o tipo de ferramenta de IA que construo dentro de um time de produto.",
           goals: [
             "Dar aos assistentes de IA acesso útil aos dados sem risco para a produção",
             "Proteger dados pessoais (LGPD)",
@@ -325,15 +321,14 @@ window.SITE = {
   },
 
   experience: {
-    label: "Trajetória",
-    title: "A bagagem que *chega ao seu projeto.*",
-    lede: "Mais de 10 anos em empresas de grande porte. É essa experiência que aplico nos projetos de clientes.",
+    title: "Experiência",
+    lede: "Mais de 10 anos entre educação, mídia e banco, de programador a lead técnico.",
     items: [
       {
         company: "Arcotech",
         meta: "Educação · remoto",
         role: "Engenheiro de Software",
-        period: "2025 a hoje",
+        period: "2025 a 2026",
         summary: "Integrações, integridade de dados e ferramentas de IA para o time do produto Portal Plus.",
         contributions: [
           "Lead técnico de 4 dos 5 projetos do último ciclo",
@@ -387,9 +382,8 @@ window.SITE = {
   },
 
   skills: {
-    label: "Competências",
-    title: "Ferramentas, *com contexto de uso.*",
-    lede: "Sem barras de porcentagem: cada grupo mostra onde a experiência foi aplicada.",
+    title: "Competências",
+    lede: "Ferramentas que uso, agrupadas por área, com um exemplo de onde cada grupo foi aplicado.",
     groups: [
       { title: "Linguagens", items: ["JavaScript", "TypeScript", "Go", "PHP", "SQL"], evidence: "TypeScript e Node.js como base; Go na Globo." },
       { title: "Backend e arquitetura", items: ["Node.js", "Express", "APIs REST", "Microsserviços", "TypeORM", "Clean Architecture", "DDD", "Hexagonal"], evidence: "Microsserviços REST em Node.js desde 2019." },
@@ -402,23 +396,8 @@ window.SITE = {
     ],
   },
 
-  process: {
-    label: "Como trabalho",
-    title: "Como um projeto *acontece.*",
-    lede: "Etapas claras, entregas frequentes e nenhuma surpresa no fim do mês.",
-    steps: [
-      { title: "Conversa inicial", text: "Você conta o que precisa. Eu faço perguntas, olho o que já existe e defino com você o problema real.", output: "Resumo do problema", time: "sem custo" },
-      { title: "Proposta", text: "Escopo, prioridades, riscos e estimativas em faixas, com marcos verificáveis.", output: "Proposta e cronograma", time: "3 a 5 dias" },
-      { title: "Desenho da solução", text: "Arquitetura proporcional ao problema, com as decisões registradas.", output: "Diagramas e decisões", time: "1 semana" },
-      { title: "Desenvolvimento", text: "Entregas curtas e planejadas, cada uma com relatório do que mudou.", output: "Software funcionando", time: "iterativo" },
-      { title: "Validação", text: "Testes automatizados, testes de carga quando fizer sentido e homologação com quem usa.", output: "Relatório de qualidade", time: "contínuo" },
-      { title: "Entrega e evolução", text: "Publicação, documentação e suporte após a entrega.", output: "Sistema no ar", time: "suporte combinado" },
-    ],
-  },
-
   testimonials: {
-    label: "Depoimentos",
-    title: "O que dizem *sobre o trabalho.*",
+    title: "Depoimentos",
     lede: "",
     items: [
       // Adicione depoimentos reais e ligue `sections.testimonials`.
@@ -427,8 +406,7 @@ window.SITE = {
   },
 
   education: {
-    label: "Formação",
-    title: "Formação e *idiomas.*",
+    title: "Formação e idiomas",
     groups: [
       {
         title: "Formação acadêmica",
@@ -447,30 +425,27 @@ window.SITE = {
   },
 
   faq: {
-    label: "FAQ",
-    title: "Perguntas *frequentes.*",
+    title: "Perguntas frequentes",
     items: [
-      { q: "Quais tipos de projeto você aceita?", a: "Integrações entre sistemas, APIs e backend, sites e aplicações web, automações com IA e revisões técnicas. Funciono melhor em projetos com impacto direto no negócio e em que eu possa participar desde a definição do problema." },
-      { q: "Como funciona a contratação?", a: "Começamos com uma conversa, sem custo. Se fizer sentido, envio uma proposta com escopo, faixas de estimativa e marcos de entrega." },
-      { q: "Você trabalha por projeto ou por hora?", a: "Os dois. Projetos com escopo claro costumam ser por valor fechado com marcos. Consultorias e reforço de time funcionam melhor em pacotes mensais de horas." },
-      { q: "Como são definidos os prazos?", a: "A partir da conversa inicial, com estimativas em faixas e os riscos explícitos. Os prazos são revisados a cada entrega, com transparência." },
-      { q: "Você oferece suporte após a entrega?", a: "Sim. O período de suporte e a evolução depois da entrega são combinados na proposta." },
-      { q: "Você atende empresas de fora de São Paulo?", a: "Sim. O atendimento é remoto, com reuniões por vídeo e acompanhamento por mensagens." },
-      { q: "É possível trabalhar com uma equipe existente?", a: "Sim. Participo das rotinas do time, faço revisões de código e deixo a documentação necessária para que vocês sigam sem dependência." },
+      { q: "Quais modelos de contratação você aceita?", a: "PJ ou CLT. O formato pode ser conversado junto com o escopo da posição e o momento do time." },
+      { q: "Que tipo de posição você procura?", a: "Engenheiro de software sênior ou lead técnico, com foco em backend, integrações, nuvem ou IA aplicada. Rendo mais em times de produto, perto de quem decide o que construir." },
+      { q: "Você trabalha remoto?", a: "Sim, trabalho em formato remoto, com reuniões por vídeo e boa parte da comunicação por escrito. Moro em Jundiaí, SP." },
+      { q: "Já liderou times?", a: "Sim. Fui Tech Lead na Kroton, com a arquitetura de um produto do zero, e lead técnico em 4 dos 5 projetos do último ciclo na Arcotech." },
+      { q: "Como você usa IA no dia a dia?", a: "Como ferramenta de engenharia, com revisão humana em todo resultado. Construí servidores MCP usados por um time e a Squad, minha equipe de agentes que leva demandas do board até o deploy." },
+      { q: "Qual o seu nível de inglês?", a: "Intermediário. Leio documentação, issues e código em inglês no dia a dia." },
     ],
   },
 
   contact: {
-    label: "Contato",
-    title: "Vamos conversar sobre *o seu projeto?*",
-    text: "Conte em poucas linhas o que você precisa. Respondo com os próximos passos, ou com uma indicação se eu não for a melhor pessoa para ajudar.",
+    title: "Vamos conversar?",
+    text: "Se a sua empresa procura um engenheiro de software para uma posição PJ ou CLT, me escreva contando a vaga, o modelo de contratação e um pouco sobre o time.",
     email: "amuller.sousa@gmail.com",
     whatsapp: {
       number: "5519987114450", // formato internacional, só números
-      message: "Olá, Sousa! Vi seu site e gostaria de conversar sobre um projeto.",
+      message: "Olá, Sousa! Vi seu portfólio e gostaria de conversar sobre uma vaga.",
       isExample: false,
     },
-    subjects: ["Novo projeto", "Integração entre sistemas", "Site ou aplicação web", "IA aplicada", "Revisão técnica", "Outro assunto"],
+    subjects: ["Vaga CLT", "Vaga PJ", "Projeto pontual", "Outro assunto"],
     socials: [
       { label: "LinkedIn", url: "https://www.linkedin.com/in/sousamuller", handle: "/in/sousamuller" },
       { label: "GitHub", url: "https://github.com/amullersousa", handle: "@amullersousa" },
@@ -478,6 +453,6 @@ window.SITE = {
   },
 
   footer: {
-    description: "Engenharia de software freelancer: integrações, sistemas web e IA aplicada para empresas que precisam de sistemas confiáveis.",
+    description: "Engenheiro de software com foco em backend, integrações, nuvem AWS e IA aplicada. Disponível para posições PJ ou CLT.",
   },
 };

@@ -1,8 +1,8 @@
 # Portfólio · Sousa Müller
 
-Site estático de portfólio para freelancer de tecnologia. HTML, CSS e JavaScript puro — sem build, sem backend. Pronto para o GitHub Pages.
+Site estático de portfólio profissional, voltado a empresas que contratam engenheiros de software (PJ ou CLT). HTML, CSS e JavaScript puro — sem build, sem backend. Pronto para o GitHub Pages.
 
-Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Sousa Müller e da análise dos projetos reais. Estilo do texto: foco em freelancer, sem travessão (—).
+Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Sousa Müller e da análise dos projetos reais. Estilo do texto: tom de profissional buscando uma posição PJ ou CLT, sem travessão.
 
 ## Estrutura
 
@@ -16,16 +16,15 @@ assets/images/          favicon.svg, og-image.png e suas imagens
 
 ## Personalização
 
-1. **Conteúdo** — edite apenas `assets/js/data.js`. Cada seção é um objeto (`profile`, `services`, `projects`, `experience`, `skills`, `process`, `testimonials`, `education`, `faq`, `contact`).
-   - Use `*asteriscos*` nos títulos para aplicar a ênfase em itálico.
+1. **Conteúdo** — edite apenas `assets/js/data.js`. Cada seção é um objeto (`profile`, `experience`, `projects`, `services` (áreas de atuação), `skills`, `about`, `testimonials`, `education`, `faq`, `contact`).
    - Adicione ou remova itens dos arrays livremente; o layout se adapta.
-2. **Ocultar seções** — em `sections`, defina `false` (ex.: `education: false`). A numeração e a navegação se ajustam sozinhas.
+2. **Ocultar seções** — em `sections`, defina `false` (ex.: `education: false`). A navegação se ajusta sozinha. A ordem das seções na página é a ordem das `<section>` em `index.html`.
 3. **Avisos de demonstração** — quando o conteúdo for real, defina `meta.showDemoNotices: false`.
-4. **Foto** — salve em `assets/images/` (proporção 4:5) e informe em `profile.photo`, ex.: `"assets/images/retrato.jpg"`. Sem foto, é exibido um placeholder.
+4. **Foto** — salve em `assets/images/` (proporção 4:5) e informe em `profile.photo`, ex.: `"assets/images/retrato.jpg"`. A foto aparece no topo da página; sem foto, o espaço some.
 5. **Capas dos projetos** — cada projeto tem uma ilustração gerada em HTML/CSS (`cover`: `flow`, `landing`, `agents`, `mcp`, `saas`, `fleet`, `dashboard`, `automation`) e uma cor (`hue`, 0–360). A capa `flow` lê os nós de `flow.left`, `flow.hub`, `flow.hubNote` e `flow.right`; a capa `agents` lê `agents.title` e `agents.rows` (`[nome, "ok"|"warn"|"", status]`). Para usar um print real, preencha `image` com o caminho do arquivo (16:10 recomendado).
 6. **Links de projetos** — `links` é uma lista `[{ label, url }]`; lista vazia esconde os botões. `note` mostra um aviso abaixo (ex.: código privado). `confidential: true` exibe a etiqueta "Confidencial" no cartão. Campos vazios (`duration`, `process`, `learnings`) somem do estudo de caso.
 7. **Contato** — `contact.email`, `contact.whatsapp.number` (formato internacional, só números; ex.: `5511987654321`) e `contact.socials`. Defina `whatsapp.isExample: false` ao usar seu número real.
-8. **Visual** — cores, fontes e espaçamentos estão em variáveis CSS no topo de `styles.css` (`:root`). A cor de destaque é `--accent`.
+8. **Visual** — cores, fontes e espaçamentos estão em variáveis CSS no topo de `styles.css` (`:root`). O tema é escuro; a cor de destaque é `--accent` e deve ser usada com moderação (links, foco e item ativo do menu).
 9. **SEO** — atualize `<title>`, `meta description` e as tags `og:` em `index.html`. Troque `assets/images/og-image.png` (1200×630) e `favicon.svg`. Para o Open Graph funcionar em todas as redes, use a URL absoluta da imagem após publicar.
 
 ## Formulário de contato (limitação importante)

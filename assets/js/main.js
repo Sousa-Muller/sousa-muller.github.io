@@ -18,22 +18,18 @@
     });
   };
   var rich = function (v) { return esc(v).replace(/\*(.+?)\*/g, "<em>$1</em>"); };
-  var pad = function (n) { return String(n).padStart(2, "0"); };
   var demo = function (label) {
     return S.meta && S.meta.showDemoNotices ? '<span class="demo-note">' + esc(label || S.meta.demoLabel) + "</span>" : "";
   };
   var map = function (arr, fn) { return (arr || []).map(fn).join(""); };
 
-  /* ---------- Section numbering ---------- */
-  var ORDER = ["services", "projects", "process", "about", "experience", "skills", "testimonials", "education", "faq", "contact"];
-  var enabled = ORDER.filter(function (k) { return S.sections[k] !== false && S[k]; });
-  var num = function (key) { return pad(enabled.indexOf(key) + 1); };
+  /* ---------- Section head ---------- */
+  var enabled = Object.keys(S.sections).filter(function (k) { return S.sections[k] !== false && S[k]; });
 
-  function head(key, id, d, extra) {
+  function head(id, d) {
     return '<header class="section-head" data-reveal>' +
-      '<p class="eyebrow"><span class="eyebrow-num">' + num(key) + '</span><span>' + esc(d.label) + "</span></p>" +
       '<h2 class="section-title" id="' + id + '-title">' + rich(d.title) + "</h2>" +
-      (d.lede ? '<p class="section-lede">' + rich(d.lede) + "</p>" : "") + (extra || "") +
+      (d.lede ? '<p class="section-lede">' + rich(d.lede) + "</p>" : "") +
       "</header>";
   }
 
@@ -57,57 +53,41 @@
     $$('[data-bind="name"]').forEach(function (el) { el.textContent = p.name; });
     var b = function (k, v) { var el = $('#hero-copy [data-bind="' + k + '"]'); if (el) el.textContent = v; };
     b("role", p.role); b("subheadline", p.subheadline); b("primaryCta", p.primaryCta); b("secondaryCta", p.secondaryCta);
+    var second = $('#hero-copy [data-bind="secondaryCta"]');
+    if (second && p.secondaryCtaHref) {
+      second.href = p.secondaryCtaHref;
+      if (/^https?:/.test(p.secondaryCtaHref)) { second.target = "_blank"; second.rel = "noopener"; }
+    }
     $("#hero-title").innerHTML = rich(p.headline);
-    $("#hero-stack").innerHTML = "<b>Stack principal</b>" + map(p.stack, function (t) { return "<span>" + esc(t) + "</span>"; });
+    $("#hero-stack").innerHTML = map(p.stack, function (t) { return "<span>" + esc(t) + "</span>"; });
     $("#hero-stats").innerHTML = map(p.stats, function (s) {
-      return '<div><dt>' + esc(s.label) + '</dt><dd data-count="' + s.value + '" data-suffix="' + esc(s.suffix) + '">' + esc(s.value) + esc(s.suffix) + "</dd></div>";
+      return "<div><dt>" + esc(s.label) + "</dt><dd>" + esc(s.value) + "</dd></div>";
     }) + demo();
 
-    $$(".diagram .wire").forEach(function (w, i) {
-      var len = Math.ceil(w.getTotalLength ? w.getTotalLength() : 200);
-      w.style.setProperty("--len", len); w.style.setProperty("--i", i);
-    });
-    $$(".diagram .nodes rect").forEach(function (r, i) { r.style.setProperty("--i", i); });
-    $$(".diagram .labels text").forEach(function (t, i) { t.style.setProperty("--i", i); });
-  }
-
-  function countUp() {
-    if (reduceMotion) return;
-    $$("#hero-stats [data-count]").forEach(function (el) {
-      var target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || "", start = null, dur = 1400;
-      if (!isFinite(target)) return;
-      el.textContent = "0" + suffix;
-      var step = function (t) {
-        if (!start) start = t;
-        var k = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - k, 3);
-        el.textContent = Math.round(target * e) + suffix;
-        if (k < 1) requestAnimationFrame(step);
-      };
-      setTimeout(function () { requestAnimationFrame(step); }, 500);
-    });
+    var photo = $(".hero-photo img");
+    if (photo) {
+      if (p.photo) { photo.src = p.photo; photo.alt = p.photoAlt || ""; }
+      else photo.parentNode.remove();
+    }
   }
 
   /* ---------- About ---------- */
   function renderAbout(el) {
-    var a = S.about, p = S.profile;
-    var photo = p.photo
-      ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.photoAlt) + '" width="800" height="1000" decoding="async" onerror="this.remove()">'
-      : "";
-    el.innerHTML = '<div class="container">' + head("about", "sobre", a) +
+    var a = S.about;
+    el.innerHTML = '<div class="container">' + head("sobre", a) +
       '<div class="about-grid">' +
         '<div class="about-visual">' +
-          '<div class="portrait" data-reveal><div class="placeholder"><span>retrato 4:5 · assets/images/</span></div>' + photo +
-            '<div class="portrait-tag"><span>' + esc(p.name) + '</span><small>' + esc(p.location.split("·")[0].trim()) + "</small></div></div>" +
+          '<p class="sub-label" data-reveal>Linha do tempo</p>' +
           '<ol class="milestones" data-reveal style="--i:1">' + map(a.milestones, function (m) { return "<li><b>" + esc(m.year) + "</b><span>" + esc(m.text) + "</span></li>"; }) + "</ol>" +
         "</div>" +
         '<div class="about-body">' +
           '<div class="about-text" data-reveal>' + map(a.paragraphs, function (t) { return "<p>" + rich(t) + "</p>"; }) + "</div>" +
-          '<div><p class="sub-label" data-reveal>Filosofia de trabalho</p><div class="principles">' +
+          '<div><p class="sub-label" data-reveal>Como trabalho</p><div class="principles">' +
             map(a.principles, function (x, i) {
-              return '<div class="principle" data-reveal style="--i:' + i + '"><span class="principle-num">' + pad(i + 1) + "</span><h3>" + esc(x.title) + "</h3><p>" + esc(x.text) + "</p></div>";
+              return '<div class="principle" data-reveal style="--i:' + i + '"><h3>' + esc(x.title) + "</h3><p>" + esc(x.text) + "</p></div>";
             }) + "</div></div>" +
           '<div class="about-split">' +
-            '<div data-reveal><p class="sub-label">Diferenciais</p><ul class="check-list">' + map(a.differentials, function (d) { return "<li>" + esc(d) + "</li>"; }) + "</ul></div>" +
+            '<div data-reveal><p class="sub-label">Destaques</p><ul class="check-list">' + map(a.differentials, function (d) { return "<li>" + esc(d) + "</li>"; }) + "</ul></div>" +
             '<div data-reveal style="--i:1"><p class="sub-label">Interesses técnicos</p><div class="chips">' + map(a.interests, function (t) { return '<span class="chip">' + esc(t) + "</span>"; }) + "</div></div>" +
           "</div>" +
         "</div>" +
@@ -117,14 +97,14 @@
   /* ---------- Services ---------- */
   function renderServices(el) {
     var s = S.services;
-    el.innerHTML = '<div class="container">' + head("services", "servicos", s) +
+    el.innerHTML = '<div class="container">' + head("atuacao", s) +
       '<div class="services-grid">' + map(s.items, function (x, i) {
         return '<article class="service" data-reveal style="--i:' + (i % 3) + '">' +
-          '<div class="service-top">' + icon(x.icon) + '<span class="service-num">' + pad(i + 1) + "</span></div>" +
+          icon(x.icon) +
           "<h3>" + esc(x.title) + "</h3>" +
           '<p class="service-text">' + esc(x.text) + "</p>" +
-          '<p class="service-problem"><b>Resolve</b>' + esc(x.problem) + "</p>" +
-          '<ul class="service-deliv" aria-label="Principais entregáveis">' + map(x.deliverables, function (d) { return "<li>" + esc(d) + "</li>"; }) + "</ul>" +
+          '<p class="service-problem"><b>Na prática</b>' + esc(x.problem) + "</p>" +
+          '<ul class="service-deliv" aria-label="Ferramentas e práticas">' + map(x.deliverables, function (d) { return "<li>" + esc(d) + "</li>"; }) + "</ul>" +
         "</article>";
       }) + "</div></div>";
   }
@@ -133,14 +113,14 @@
   var COVERS = {
     saas: function (p) {
       var rows = [["Banco Aurora · 12/09", "R$ 18.420,00", "ok", "conciliado"], ["NF 3321 · Loja 04", "R$ 2.180,50", "ok", "conciliado"], ["Pix recebido", "R$ 940,00", "warn", "revisar"], ["Boleto 88213", "R$ 5.600,00", "ok", "conciliado"], ["Tarifa bancária", "R$ 34,90", "", "sugerido"]];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>' + esc(p.name.toLowerCase()) + '.app / conciliação</em></div><div class="cv-body">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>' + esc(p.name.toLowerCase()) + '.app / conciliação</em></div><div class="cv-body">' +
         '<div class="cv-side"><b></b><span class="on"></span><span></span><span></span><span></span><span></span></div>' +
         '<div class="cv-main"><div class="cv-kpis"><div class="cv-kpi"><span>conciliado hoje</span><strong>R$ 1,84M</strong></div><div class="cv-kpi"><span>automático</span><strong>87%</strong></div><div class="cv-kpi"><span>pendências</span><strong>12</strong></div></div>' +
         '<div class="cv-rows">' + map(rows, function (r) { return '<div class="cv-row"><span>' + r[0] + "</span><span>" + r[1] + '</span><span class="cv-pill ' + r[2] + '">' + r[3] + "</span></div>"; }) + "</div></div></div></div>";
     },
     fleet: function () {
       var v = [["VX-2041", "ok", "em rota"], ["VX-1187", "warn", "manutenção"], ["VX-3302", "ok", "em rota"], ["VX-0954", "", "pátio"], ["VX-2210", "ok", "em rota"]];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>frota / operação ao vivo</em></div><div class="cv-body">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>frota / operação ao vivo</em></div><div class="cv-body">' +
         '<div class="cv-map"><svg viewBox="0 0 200 160" preserveAspectRatio="none" aria-hidden="true"><path class="road" d="M0 120 L60 100 L110 110 L200 60"/><path class="road" d="M40 0 L60 100 L70 160"/><path class="road" d="M110 110 L140 160"/><path class="route" d="M20 115 L60 100 L110 110 L170 75"/><circle class="pin" cx="60" cy="100" r="4"/><circle class="pin" cx="110" cy="110" r="4"/><circle class="pin hot" cx="170" cy="75" r="5"/><circle class="pin" cx="52" cy="40" r="4"/></svg></div>' +
         '<div class="cv-list">' + map(v, function (x) { return '<div class="cv-veh"><span>' + x[0] + '</span><span class="cv-pill ' + x[1] + '">' + x[2] + "</span></div>"; }) + "</div></div></div>";
     },
@@ -152,23 +132,23 @@
         '<div class="cv-col r">' + map(f.right, node) + "</div></div>";
     },
     landing: function () {
-      return '<div class="cv-win cv-dark"><div class="cv-bar"><i></i><i></i><i></i><em>pré-venda / página única</em></div><div class="cv-landing">' +
+      return '<div class="cv-win cv-dark"><div class="cv-bar"><em>pré-venda / página única</em></div><div class="cv-landing">' +
         '<div class="cv-lcopy"><span class="cv-tag">correção mecânica</span><b>PRECISÃO EM</b><b class="hot">CADA REPETIÇÃO</b><span class="cv-line"></span><span class="cv-line short"></span><span class="cv-cta">reservar agora</span></div>' +
         '<div class="cv-lform"><span>solicitar equipamento</span><i></i><i></i><i class="half"></i><em>enviar via WhatsApp</em></div></div></div>';
     },
     agents: function (p) {
       var g = p.agents || { title: "pipeline / pedido #128", rows: [["elicitação", "ok", "pronto"], ["arquitetura", "ok", "pronto"], ["desenvolvimento", "ok", "pronto"], ["code review", "warn", "revisão humana"], ["QA de interface", "", "na fila"]] };
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>' + esc(g.title) + '</em></div><div class="cv-agents">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>' + esc(g.title) + '</em></div><div class="cv-agents">' +
         map(g.rows, function (x, i) { return '<div class="cv-agent"><b>0' + (i + 1) + "</b><span>" + esc(x[0]) + '</span><span class="cv-pill ' + x[1] + '">' + esc(x[2]) + "</span></div>"; }) + "</div></div>";
     },
     mcp: function () {
       var rows = [["db.query", "read-only", "ok"], ["user.email", "sha256:9f2c…", "warn"], ["e2e.run", "12/12 passos", "ok"], ["memory.find", "62 registros", ""]];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>mcp / ferramentas do time</em></div><div class="cv-rows cv-mcp">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>mcp / ferramentas do time</em></div><div class="cv-rows cv-mcp">' +
         map(rows, function (r) { return '<div class="cv-row"><span>' + r[0] + '</span><span class="cv-pill ' + r[2] + '">' + r[1] + "</span></div>"; }) + "</div></div>";
     },
     dashboard: function () {
       var bars = [42, 58, 50, 66, 61, 74, 70, 83, 78, 92];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>insights / visão geral</em></div><div class="cv-dash">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>insights / visão geral</em></div><div class="cv-dash">' +
         '<div class="cv-kpis"><div class="cv-kpi"><span>ocupação</span><strong>84%</strong></div><div class="cv-kpi"><span>ticket médio</span><strong>R$ 212</strong></div><div class="cv-kpi"><span>no-show</span><strong>6,1%</strong></div><div class="cv-kpi"><span>unidades</span><strong>22</strong></div></div>' +
         '<div class="cv-panel"><span>atendimentos / semana</span><div class="cv-bars">' + map(bars, function (h, i) { return '<i class="' + (i > 7 ? "on" : "") + '" style="height:' + h + '%"></i>'; }) + "</div></div>" +
         '<div class="cv-panel"><span>receita · 12 meses</span><svg viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="49" x2="100" y2="49"/><line x1="0" y1="25" x2="100" y2="25"/><polyline points="0,40 10,38 20,41 30,33 40,35 50,27 60,29 70,20 80,22 90,14 100,10"/></svg></div>' +
@@ -176,7 +156,7 @@
     },
     automation: function () {
       var t = [["#4821", "Erro ao emitir nota fiscal", "fiscal", 94], ["#4822", "Como adiciono um usuário?", "conta", 98], ["#4823", "Integração parou de sincronizar", "integração", 88], ["#4824", "Cobrança em duplicidade?", "financeiro", 52], ["#4825", "Lentidão no relatório mensal", "performance", 81]];
-      return '<div class="cv-win"><div class="cv-bar"><i></i><i></i><i></i><em>triagem / fila de entrada</em></div><div class="cv-tickets">' +
+      return '<div class="cv-win"><div class="cv-bar"><em>triagem / fila de entrada</em></div><div class="cv-tickets">' +
         map(t, function (x) {
           var low = x[3] < 70;
           return '<div class="cv-ticket"><b>' + x[0] + "</b><span>" + x[1] + '</span><span class="cv-pill ' + (low ? "warn" : "ok") + '">' + (low ? "revisão humana" : x[2]) + '</span><span class="cv-conf' + (low ? " low" : "") + '"><i style="width:' + x[3] + '%"></i></span></div>';
@@ -195,7 +175,7 @@
   /* ---------- Projects ---------- */
   function renderProjects(el) {
     var s = S.projects;
-    el.innerHTML = '<div class="container">' + head("projects", "projetos", s) +
+    el.innerHTML = '<div class="container">' + head("projetos", s) +
       '<div class="projects-grid">' + map(s.items, function (p, i) {
         return '<article class="project" data-reveal style="--i:' + (i % 2) + '">' + cover(p) +
           '<div class="project-body">' +
@@ -268,7 +248,7 @@
   /* ---------- Experience ---------- */
   function renderExperience(el) {
     var s = S.experience;
-    el.innerHTML = '<div class="container">' + head("experience", "experiencia", s) +
+    el.innerHTML = '<div class="container">' + head("experiencia", s) +
       '<ol class="timeline">' + map(s.items, function (j) {
         return '<li class="job" data-reveal>' +
           '<div class="job-when"><p class="job-period">' + esc(j.period) + '</p><p class="job-company">' + esc(j.company) + '</p><p class="job-meta">' + esc(j.meta) + "</p></div>" +
@@ -283,30 +263,20 @@
   /* ---------- Skills ---------- */
   function renderSkills(el) {
     var s = S.skills;
-    el.innerHTML = '<div class="container">' + head("skills", "competencias", s) +
+    el.innerHTML = '<div class="container">' + head("competencias", s) +
       '<div class="skills-grid">' + map(s.groups, function (g, i) {
         return '<section class="skill-group" data-reveal style="--i:' + (i % 4) + '" aria-labelledby="sk-' + i + '">' +
-          '<div class="skill-head"><h3 id="sk-' + i + '">' + esc(g.title) + '</h3><span class="count">' + pad(g.items.length) + "</span></div>" +
+          '<div class="skill-head"><h3 id="sk-' + i + '">' + esc(g.title) + "</h3></div>" +
           '<ul class="chips">' + map(g.items, function (t) { return '<li class="chip">' + esc(t) + "</li>"; }) + "</ul>" +
           (g.evidence ? '<p class="skill-evidence">' + esc(g.evidence) + "</p>" : "") + "</section>";
       }) + "</div></div>";
-  }
-
-  /* ---------- Process ---------- */
-  function renderProcess(el) {
-    var s = S.process;
-    el.innerHTML = '<div class="container">' + head("process", "processo", s) +
-      '<div class="process" data-reveal data-reveal-keep><ol class="process-list">' + map(s.steps, function (x, i) {
-        return '<li class="step" data-reveal style="--i:' + i + '"><span class="step-marker">' + pad(i + 1) + "</span><h3>" + esc(x.title) + "</h3><p>" + esc(x.text) + "</p>" +
-          '<p class="step-foot"><b>' + esc(x.output) + "</b><span>" + esc(x.time) + "</span></p></li>";
-      }) + "</ol></div></div>";
   }
 
   /* ---------- Testimonials ---------- */
   function renderTestimonials(el) {
     var s = S.testimonials;
     var items = (s.items || []).slice().sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
-    el.innerHTML = '<div class="container">' + head("testimonials", "depoimentos", s) +
+    el.innerHTML = '<div class="container">' + head("depoimentos", s) +
       '<div class="quotes">' + map(items, function (t, i) {
         return '<figure class="quote' + (t.featured ? " quote--featured" : "") + '" data-reveal style="--i:' + i + '">' +
           "<blockquote><p>" + esc(t.quote) + "</p></blockquote>" +
@@ -318,7 +288,7 @@
   /* ---------- Education ---------- */
   function renderEducation(el) {
     var s = S.education;
-    el.innerHTML = '<div class="container">' + head("education", "formacao", s) +
+    el.innerHTML = '<div class="container">' + head("formacao", s) +
       '<div class="edu-grid">' + map(s.groups, function (g, i) {
         return '<div class="edu-group" data-reveal style="--i:' + i + '"><h3>' + esc(g.title) + "</h3><ul>" +
           map(g.items, function (x) { return "<li><b>" + esc(x.name) + "</b><span>" + esc(x.org) + "<i>" + esc(x.year) + "</i></span></li>"; }) + "</ul></div>";
@@ -328,7 +298,7 @@
   /* ---------- FAQ ---------- */
   function renderFaq(el) {
     var s = S.faq;
-    el.innerHTML = '<div class="container">' + head("faq", "faq", s) +
+    el.innerHTML = '<div class="container">' + head("faq", s) +
       '<div class="faq-layout"><div class="faq-list" data-reveal>' + map(s.items, function (f, i) {
         return '<div class="faq-item"><h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-' + i + '" aria-expanded="false" aria-controls="faq-a-' + i + '"><span>' + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true"></span></button></h3>' +
           '<div class="faq-a" id="faq-a-' + i + '" role="region" aria-labelledby="faq-q-' + i + '"><div><p>' + esc(f.a) + "</p></div></div></div>";
@@ -349,7 +319,7 @@
   function renderContact(el) {
     var c = S.contact, w = c.whatsapp || {};
     el.classList.add("contact");
-    el.innerHTML = '<div class="container">' + head("contact", "contato", c) +
+    el.innerHTML = '<div class="container">' + head("contato", c) +
       '<div class="contact-grid">' +
         '<div class="contact-info" data-reveal>' +
           "<p>" + esc(c.text) + "</p>" +
@@ -365,7 +335,7 @@
           field("name", "Nome", '<input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Seu nome">') +
           field("email", "E-mail", '<input id="f-email" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com">') +
           field("subject", "Assunto", '<select id="f-subject" name="subject" required>' + map(c.subjects, function (s) { return "<option>" + esc(s) + "</option>"; }) + "</select>", true) +
-          field("message", "Mensagem", '<textarea id="f-message" name="message" required minlength="20" placeholder="Contexto, objetivo e prazo aproximado do projeto."></textarea>', true) +
+          field("message", "Mensagem", '<textarea id="f-message" name="message" required minlength="20" placeholder="Empresa, vaga, modelo de contratação (PJ ou CLT) e um pouco sobre o time."></textarea>', true) +
           '<div class="form-foot"><p class="form-hint">Ao enviar, seu aplicativo de e-mail será aberto com a mensagem pronta. Nada é enviado por este site.</p><button class="btn btn-light" type="submit">Preparar mensagem <span class="arrow" aria-hidden="true">→</span></button></div>' +
           '<div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>' +
         "</form>" +
@@ -382,7 +352,7 @@
     var messages = {
       name: "Informe seu nome.",
       email: "Informe um e-mail válido.",
-      message: "Escreva pelo menos 20 caracteres sobre o projeto.",
+      message: "Escreva pelo menos 20 caracteres sobre a vaga.",
     };
     var validate = function (input) {
       var ok = input.checkValidity() && input.value.trim().length > 0;
@@ -429,7 +399,7 @@
     var f = $("#site-footer"), p = S.profile, c = S.contact || {};
     var navItems = navList();
     f.innerHTML = '<div class="container footer-grid">' +
-      '<div class="footer-brand"><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"></span><span>' + esc(p.name) + "</span></a><p>" + esc(S.footer.description) + "</p></div>" +
+      '<div class="footer-brand"><a class="brand" href="#inicio"><span>' + esc(p.name) + "</span></a><p>" + esc(S.footer.description) + "</p></div>" +
       '<div class="footer-col"><h2>Navegação</h2>' + map(navItems, function (n) { return '<a href="#' + n.id + '">' + esc(n.label) + "</a>"; }) + "</div>" +
       '<div class="footer-col"><h2>Contato</h2>' + (c.email ? '<a href="mailto:' + esc(c.email) + '">E-mail</a>' : "") +
         map(c.socials, function (s) { return '<a href="' + esc(s.url) + '"' + (/^https?:/.test(s.url) ? ' target="_blank" rel="noopener"' : "") + ">" + esc(s.label) + "</a>"; }) + "</div>" +
@@ -450,8 +420,8 @@
   function renderNav() {
     var items = navList();
     $("#nav-list").innerHTML = map(items, function (n) { return '<li><a href="#' + n.id + '" data-nav="' + n.id + '">' + esc(n.label) + "</a></li>"; });
-    $("#mobile-list").innerHTML = map(items, function (n, i) { return '<li><a href="#' + n.id + '" data-nav="' + n.id + '">' + esc(n.label) + "<span>" + pad(i + 1) + "</span></a></li>"; }) +
-      '<li><a href="#contato" data-nav="contato">Contato<span>' + pad(items.length + 1) + "</span></a></li>";
+    $("#mobile-list").innerHTML = map(items, function (n) { return '<li><a href="#' + n.id + '" data-nav="' + n.id + '">' + esc(n.label) + "</a></li>"; }) +
+      '<li><a href="#contato" data-nav="contato">Contato</a></li>';
   }
   function bindHeader() {
     var header = $("#site-header"), toggle = $(".menu-toggle"), menu = $("#mobile-menu");
@@ -484,7 +454,7 @@
     var ids = links.map(function (a) { return a.dataset.nav; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
     var watch = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
     // Seções sem link (ex.: competências) herdam o link anterior
-    var extra = { competencias: "experiencia", depoimentos: "processo", formacao: "processo" };
+    var extra = { competencias: "atuacao", depoimentos: "sobre", formacao: "sobre" };
     Object.keys(extra).forEach(function (k) { var el = document.getElementById(k); if (el && el.innerHTML.trim()) watch.push(el); });
     var set = function (id) {
       links.forEach(function (a) { var on = a.dataset.nav === id; a.classList.toggle("is-active", on); if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
@@ -518,7 +488,7 @@
   /* ---------- Init ---------- */
   var RENDER = {
     about: renderAbout, services: renderServices, projects: renderProjects, experience: renderExperience,
-    skills: renderSkills, process: renderProcess, testimonials: renderTestimonials, education: renderEducation,
+    skills: renderSkills, testimonials: renderTestimonials, education: renderEducation,
     faq: renderFaq, contact: renderContact,
   };
   try {
@@ -533,7 +503,6 @@
     bindHeader();
     bindActiveSection();
     bindReveal();
-    countUp();
 
     document.addEventListener("click", function (e) {
       var p = e.target.closest("[data-project]"); if (p) { openProject(p.dataset.project); return; }
