@@ -1,7 +1,7 @@
 /* =====================================================================
    CONTEÚDO DO SITE: edite apenas este arquivo para personalizar.
    ---------------------------------------------------------------------
-   • Fonte: currículo de Sousa Müller (set/2026) e análise dos projetos.
+   • Fonte: currículo de Alex Müller (set/2026) e análise dos projetos.
    • Para ocultar uma seção, defina false em `sections`.
    • Imagens: coloque arquivos em assets/images/ e informe o caminho
      relativo (ex.: "assets/images/retrato.jpg"). Campos vazios exibem
@@ -30,9 +30,9 @@ window.SITE = {
   },
 
   profile: {
-    name: "Sousa Müller",
-    shortName: "Sousa",
-    initials: "SM",
+    name: "Alex Müller",
+    shortName: "Alex",
+    initials: "AM",
     role: "Engenheiro de software",
     location: "Jundiaí, SP · trabalho remoto",
     availability: "Disponível para posições PJ ou CLT",
@@ -50,7 +50,7 @@ window.SITE = {
       { value: "~230 mil", label: "cadastros saneados em produção" },
     ],
     photo: "assets/images/retrato.jpg", // proporção 4:5
-    photoAlt: "Retrato de Sousa Müller",
+    photoAlt: "Retrato de Alex Müller",
   },
 
   nav: [
@@ -65,7 +65,7 @@ window.SITE = {
     title: "Sobre mim",
     lede: "Engenheiro de software desde 2014, hoje com foco em backend, integrações e IA aplicada.",
     paragraphs: [
-      "Sou Sousa Müller, engenheiro de software. Desde 2014 construo sistemas em produção: sites e plataformas de ensino, produtos de educação, funcionalidades do Gshow e do Receitas na Globo e o fluxo de empréstimo consignado no app do Itaú Unibanco.",
+      "Sou Alex Müller, engenheiro de software. Desde 2014 construo sistemas em produção: sites e plataformas de ensino, produtos de educação, funcionalidades do Gshow e do Receitas na Globo e o fluxo de empréstimo consignado no app do Itaú Unibanco.",
       "Na Arcotech, de 2025 a setembro de 2026, fui lead técnico em 4 dos 5 projetos do último ciclo, com integrações, integridade de dados e ferramentas de IA para o time. Em paralelo, entreguei projetos para clientes diretos, como a integração entre plataforma de projetos e ERP do Grupo Soluto e o site de pré-venda do Clutch Shooter.",
       "Gosto de trabalhar perto do produto: entender o problema, propor uma solução do tamanho certo, entregar em partes pequenas e deixar o caminho documentado para quem vem depois. Procuro uma posição, PJ ou CLT, em que eu faça isso dentro de um time.",
     ],
@@ -442,7 +442,7 @@ window.SITE = {
     email: "amuller.sousa@gmail.com",
     whatsapp: {
       number: "5519987114450", // formato internacional, só números
-      message: "Olá, Sousa! Vi seu portfólio e gostaria de conversar sobre uma vaga.",
+      message: "Olá, Alex! Vi seu portfólio e gostaria de conversar sobre uma vaga.",
       isExample: false,
     },
     subjects: ["Vaga CLT", "Vaga PJ", "Projeto pontual", "Outro assunto"],

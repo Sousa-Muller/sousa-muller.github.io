@@ -1,8 +1,8 @@
-# Portfólio · Sousa Müller
+# Portfólio · Alex Müller
 
 Site estático de portfólio profissional, voltado a empresas que contratam engenheiros de software (PJ ou CLT). HTML, CSS e JavaScript puro — sem build, sem backend. Pronto para o GitHub Pages.
 
-Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Sousa Müller e da análise dos projetos reais. Estilo do texto: tom de profissional buscando uma posição PJ ou CLT, sem travessão.
+Publicado em **https://sousa-muller.github.io/**. O conteúdo vem do currículo de Alex Müller e da análise dos projetos reais. Estilo do texto: tom de profissional buscando uma posição PJ ou CLT, sem travessão.
 
 ## Estrutura
 
